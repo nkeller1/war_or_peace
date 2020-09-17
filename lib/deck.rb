@@ -10,7 +10,16 @@ class Deck
   end
 
   def high_ranking_cards
-
+    high_rank = Array.new
+    @cards.each do |card|
+      high_rank << card if card.rank >= 11
+    end
+    high_rank
   end
+
+  def percent_high_ranking
+    ((self.high_ranking_cards.length.to_f  / @cards.length) * 100).round(2)
+  end
+
 
 end
