@@ -18,12 +18,20 @@ class Turn
   end
 
   def winner
-    if player1.deck.rank_of_card_at(0) > player2.deck.rank_of_card_at(0)
-      player1
+    if type == :basic
+      if player1.deck.rank_of_card_at(0) > player2.deck.rank_of_card_at(0)
+        player1
+      else
+        player2
+      end
+    elsif type == :war
+      if player1.deck.rank_of_card_at(2) > player2.deck.rank_of_card_at(2)
+        player1
+      else
+        player2
+      end
     elsif type == :mutually_assured_destruction
       "No Winner"
-    else
-      player2
     end
   end
 
@@ -32,6 +40,9 @@ class Turn
       @spoils_of_war.append(player1.deck.cards.shift)
       @spoils_of_war.append(player2.deck.cards.shift)
     elsif type == :war
+      @spoils_of_war.append(player1.deck.cards.slice!(0..2))
+      @spoils_of_war.append(player2.deck.cards.slice!(0..2))
+      @spoils_of_war.flatten!
     elsif type == :mutually_assured_destruction
       player1.deck.cards.slice!(0..2)
       player2.deck.cards.slice!(0..2)
