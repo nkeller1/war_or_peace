@@ -53,5 +53,4 @@ class Turn
     winner.deck.cards << @spoils_of_war
     winner.deck.cards.flatten!
   end
-
 end
