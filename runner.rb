@@ -2,6 +2,7 @@ require_relative './lib/deck'
 require_relative './lib/card'
 require_relative './lib/player'
 require_relative './lib/turn'
+require_relative './lib/game'
 
   def create_deck
     suits = [:heart, :diamond, :club, :spade]
@@ -42,4 +43,10 @@ puts "Welcome to War! (or Peace) This game will be played with 52 cards."
 shuffle_and_hand_out_cards
 puts "The players today are #{@player1.name} and #{@player2.name}"
 puts "Type 'GO' to start the game!"
-2.times do puts "-" end
+puts '-----------------------------------------------------------------'
+input = gets.chomp
+if input.downcase != "go"
+  puts 'Thank you for playing!'
+else
+  Game.start(@player1, @player2)
+end
