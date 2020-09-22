@@ -42,4 +42,10 @@ puts "Welcome to War! (or Peace) This game will be played with 52 cards."
 shuffle_and_hand_out_cards
 puts "The players today are #{@player1.name} and #{@player2.name}"
 puts "Type 'GO' to start the game!"
-2.times do puts "-" end
+puts '-----------------------------------------------------------------'
+input = gets.chomp()
+if input.upcase == 'G0'
+  Game.start
+else
+  puts 'Thank you for playing!'
+end
