@@ -33,8 +33,8 @@ require_relative './lib/game'
     cards = create_deck
     cards.shuffle!
     divide = cards.each_slice(26).to_a
-    deck1 = divide[0]
-    deck2 = divide[1]
+    deck1 = Deck.new(divide[0])
+    deck2 = Deck.new(divide[1])
     @player1 = Player.new('Nathan', deck1)
     @player2 = Player.new('Jessa', deck2)
   end

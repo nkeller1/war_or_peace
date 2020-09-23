@@ -50,7 +50,11 @@ class Turn
   end
 
   def award_spoils(winner)
-    winner.deck.cards << @spoils_of_war
-    winner.deck.cards.flatten!
+    if type == :mutually_assured_destruction
+      @spoils_of_war = []
+    else
+      winner.deck.cards << @spoils_of_war
+      winner.deck.cards.flatten!
+    end
   end
 end

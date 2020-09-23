@@ -12,14 +12,25 @@ class Game
   end
 
   def self.start(player1, player2)
-    until player1.deck.empty? || player2.deck.empty? do
-      number = 1
+    number = 1
+    until player1.has_lost? || player2.has_lost? do
       turn = Turn.new(player1, player2)
-      require "pry"; binding.pry
-      puts "Turn #{number}: #{player1} won 2 cards"
-
+      turn.pile_cards
+      if turn.type == :basic
+        puts "Turn #{number}: #{turn.winner.name} won #{turn.spoils_of_war.length} cards"
+      elsif turn.type == :war
+        puts "WAR - #{turn.winner.name} won #{turn.spoils_of_war.length} cards"
+      elsif turn.type == :mutually_assured_destruction
+        puts "*mutually assured destruction* 6 cards removed from play"
+      end
+      turn.award_spoils(turn.winner)
       number += 1
     end
-  end
 
+    if player1.has_lost?
+      puts "#{player2.name} has won the game!"
+    else
+      puts "#{player1.name} has won the game!"
+    end
+  end
 end
